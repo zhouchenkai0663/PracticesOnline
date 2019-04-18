@@ -11,7 +11,7 @@ import net.lzzy.sqllib.DbPackager;
  */
 public final class DbConstants {
     private DbConstants(){}
-    private static final String DB_NAME = "film.db";
+    private static final String DB_NAME = "practices.db";
     private static final int DB_VERSION = 1;
     public static DbPackager packager;
     static {
