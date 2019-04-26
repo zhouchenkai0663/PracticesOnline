@@ -1,13 +1,18 @@
 package net.lzzy.practicesonline.activities.utils;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+
 import android.widget.Toast;
+
+import androidx.appcompat.widget.SearchView;
 
 import net.lzzy.practicesonline.R;
 import net.lzzy.practicesonline.activities.activities.SplashActivity;
@@ -47,4 +52,41 @@ public class ViewUtils {
             ((SplashActivity) context).gotoMain();
         }
     }
+
+    public static abstract class AbstractTouchHandler implements View.OnTouchListener{
+
+        @SuppressLint("ClickableViewAccessibility")
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return handleTouch(event);
+        }
+
+        /**
+         * 处理触摸事件
+         * @param event 触摸事件对象
+         * @return 消费触摸事件吗
+         */
+        public abstract boolean handleTouch(MotionEvent event);
+    }
+    public static abstract class AbstractQueryHandler implements SearchView.OnQueryTextListener{
+
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            handleQuery(newText);
+            return false;
+        }
+
+        /**
+         * handle query logic
+         * @param kw keyword
+         * @return end query
+         */
+        public abstract void handleQuery(String kw);
+    }
+
 }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<dimen name="dimens_splash">50dp</dimen>
+    <dimen name="titleSize">22sp</dimen>
+    <dimen name="layoutMargin">18dp</dimen>
+    <dimen name="numberSize">20sp</dimen>
+    <dimen name="roundCorner">6dp</dimen>
+    <dimen name="shadow">4dp</dimen>
+</resources>

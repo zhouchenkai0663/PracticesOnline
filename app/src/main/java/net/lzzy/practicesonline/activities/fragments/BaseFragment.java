@@ -21,14 +21,14 @@ import java.util.Objects;
  */
 public abstract class BaseFragment extends Fragment {
 
-   // private static List<Activity> activities = new LinkedList<>();
+    // private static List<Activity> activities = new LinkedList<>();
     public BaseFragment() {
     }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         return inflater.inflate(getLayoutRes(), container, false);
     }
 
