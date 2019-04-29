@@ -20,6 +20,7 @@ public class QuestionFactory {
 
     private QuestionFactory() {
         repository = new SqlRepository<>(AppUtils.getContext(), Question.class, DbConstants.packager);
+        optionRepository = new SqlRepository<>(AppUtils.getContext(), Option.class, DbConstants.packager);
     }
 
 
@@ -70,7 +71,8 @@ public class QuestionFactory {
     }
 
     /**
-     *  配置好option（选项） 题目与选项要完整
+     * 配置好option（选项） 题目与选项要完整
+     *
      * @param question
      */
     private void completeQuestion(Question question) throws InstantiationException, IllegalAccessException {

@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
@@ -53,7 +54,7 @@ public class ViewUtils {
         }
     }
 
-    public static abstract class AbstractTouchHandler implements View.OnTouchListener{
+    public static abstract class AbstractTouchHandler implements View.OnTouchListener {
 
         @SuppressLint("ClickableViewAccessibility")
         @Override
@@ -63,12 +64,14 @@ public class ViewUtils {
 
         /**
          * 处理触摸事件
+         *
          * @param event 触摸事件对象
          * @return 消费触摸事件吗
          */
         public abstract boolean handleTouch(MotionEvent event);
     }
-    public static abstract class AbstractQueryHandler implements SearchView.OnQueryTextListener{
+
+    public static abstract class AbstractQueryHandler implements SearchView.OnQueryTextListener {
 
         @Override
         public boolean onQueryTextSubmit(String query) {
@@ -83,10 +86,30 @@ public class ViewUtils {
 
         /**
          * handle query logic
+         *
          * @param kw keyword
          * @return end query
          */
         public abstract void handleQuery(String kw);
+    }
+
+    private static AlertDialog dialog;
+
+    public static void showProgress(Context context, String message) {
+        if (dialog == null) {
+             View view=LayoutInflater.from(context).inflate(R.layout.dialog_progress,null);
+             TextView tv=view.findViewById(R.id.dialog_progress_tv);
+             tv.setText(message);
+            dialog=new AlertDialog.Builder(context).create();
+            dialog.setView(view);
+        }
+        dialog.show();
+    }
+
+    public static void dismissPrgress() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
     }
 
 }
