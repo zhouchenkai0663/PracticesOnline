@@ -44,7 +44,7 @@ public class FavoriteFactory {
 
         return null;
     }
-
+    //判断是不是收藏
     public boolean isQuestionStarred(String questionId) {
         try {
             List<Favorite> favorites = repository.getByKeyword(questionId, new String[]{Favorite.COL_QUESTION_ID}, true);
@@ -54,7 +54,7 @@ public class FavoriteFactory {
             return false;
         }
     }
-
+        //收藏题目
     public void starQuestion(UUID questionId) {
         Favorite favorite=getByQuestion(questionId.toString());
         if (favorite==null){
@@ -63,11 +63,11 @@ public class FavoriteFactory {
             repository.insert(favorite);
         }
     }
-
+    //取消收藏
     public void canceIStarQuestion(UUID questionId) {
         Favorite favorite=getByQuestion(questionId.toString());
         if (favorite!=null){
-            repository.insert(favorite);
+            repository.delete(favorite);
         }
     }
 

@@ -23,7 +23,7 @@ import net.lzzy.practicesonline.R;
 import net.lzzy.practicesonline.activities.models.Practice;
 import net.lzzy.practicesonline.activities.models.PracticeFactory;
 import net.lzzy.practicesonline.activities.models.Question;
-import net.lzzy.practicesonline.activities.models.view.UserCookies;
+import net.lzzy.practicesonline.activities.models.UserCookies;
 import net.lzzy.practicesonline.activities.network.DetectWebService;
 import net.lzzy.practicesonline.activities.network.PracticeService;
 import net.lzzy.practicesonline.activities.network.QuestionService;
@@ -84,7 +84,7 @@ public class PracticesFragment extends BaseFragment {
             switch (msg.what) {
                 case WHAT_PRACTICE_DONE:
                     practicesFragment.tvTime.setText(DateTimeUtils.DATE_TIME_FORMAT.format(new Date()));
-                    UserCookies.getInstance().updateLastRefereencesTime();
+                    UserCookies.getInstance().updateLastReferencesTime();
                     try {
                         List<Practice> practices = PracticeService.getPratices(msg.obj.toString());
                         for (Practice practice : practices) {
@@ -179,7 +179,7 @@ public class PracticesFragment extends BaseFragment {
             super.onPostExecute(s);
             PracticesFragment fragment = this.fragment.get();
             fragment.tvTime.setText(DateTimeUtils.DATE_TIME_FORMAT.format(new Date()));
-            UserCookies.getInstance().updateLastRefereencesTime();
+            UserCookies.getInstance().updateLastReferencesTime();
             try {
                 List<Practice> practices = PracticeService.getPratices(s);
                 for (Practice practice : practices) {
