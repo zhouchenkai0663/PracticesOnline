@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/fragment_chart_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!--<net.lzzy.practicesonline.activities.fragments.BarChartView-->
+            <!--android:id="@+id/fragment_chart"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@android:color/darker_gray" />-->
+
+            <!--<net.lzzy.practicesonline.activities.fragments.LineChartView-->
+            <!--android:id="@+id/fragment_chart_line"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1" />-->
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/fragment_chart_pie"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/fragment_chart_line"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/fragment_chart_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal">
+            <TextView
+                android:id="@+id/fragment_chart_dot1"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/dot_fill_style"/>
+            <TextView
+                android:id="@+id/fragment_chart_dot2"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/dot_style"/>
+            <TextView
+                android:id="@+id/fragment_chart_dot3"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/dot_style"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--<Button-->
+    <!--android:id="@+id/fragment_char_circle_btn_view"-->
+    <!--style="@style/Text1"-->
+    <!--android:layout_width="60dp"-->
+    <!--android:layout_height="60dp"-->
+    <!--android:layout_gravity="end|bottom"-->
+    <!--android:background="@drawable/view_circle"-->
+    <!--android:padding="15dp"-->
+    <!--android:paddingBottom="15dp"-->
+    <!--android:text="表"-->
+    <!--android:textColor="#FFFAF0"-->
+    <!--android:layout_marginBottom="15dp"/>-->
+</FrameLayout>

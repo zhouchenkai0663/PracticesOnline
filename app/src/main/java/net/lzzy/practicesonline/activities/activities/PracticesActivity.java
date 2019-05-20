@@ -33,7 +33,6 @@ public class PracticesActivity extends BaseActivity implements PracticesFragment
     private ServiceConnection connection;
     private boolean refresh=false;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,10 +89,6 @@ public class PracticesActivity extends BaseActivity implements PracticesFragment
         super.onDestroy();
         unbindService(connection);
     }
-
-
-
-
 
     private void initView() {
         SearchView search = findViewById(R.id.practices_sv_search);

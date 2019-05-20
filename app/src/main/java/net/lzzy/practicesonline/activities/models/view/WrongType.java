@@ -5,7 +5,7 @@ package net.lzzy.practicesonline.activities.models.view;
  * Description:
  */
 public enum WrongType {
-    RIGHT_OPTINS("正确"),MISS_OPTIONS("少选"),EXTRA_OPTIONS("少选"),
+    RIGHT_OPTINS("正确"),MISS_OPTIONS("少选"),EXTRA_OPTIONS("多选"),
     WRONG_OPTIONS("错选");
     private String name;
     WrongType(String name){

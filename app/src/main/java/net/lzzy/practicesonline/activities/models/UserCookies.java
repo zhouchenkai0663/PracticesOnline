@@ -71,7 +71,7 @@ public class UserCookies {
     public int getCurrentQuestion(String practiceId) {
         return spPosition.getInt(practiceId, 0);
     }
-
+        //阅读量
     public int getReadCount(String questionId) {
         return spReadCount.getInt(questionId, 0);
     }
