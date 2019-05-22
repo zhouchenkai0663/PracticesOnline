@@ -22,6 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import net.lzzy.practicesonline.R;
 import net.lzzy.practicesonline.activities.fragments.QuestionFragment;
+import net.lzzy.practicesonline.activities.models.FavoriteFactory;
 import net.lzzy.practicesonline.activities.models.Question;
 import net.lzzy.practicesonline.activities.models.QuestionFactory;
 import net.lzzy.practicesonline.activities.models.UserCookies;
@@ -116,7 +117,23 @@ public class QuestionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         //todo:返回查看数据 查看题目或收藏
 
-        pager.setCurrentItem(data.getIntExtra(ResultActivity.QUESTION,-1));
+        if (data != null) {
+            if (data.getBooleanExtra(ResultActivity.ENSHRINE, false)) {
+                FavoriteFactory favoriteFactory = FavoriteFactory.getInstance();
+                List<Question> cc = new ArrayList<>();
+                for (Question question : questions) {
+                    if (favoriteFactory.isQuestionStarred(question.getId().toString())){
+                        cc.add(question);
+                    }
+                }
+                questions.clear();
+                questions.addAll(cc);
+                initDots();
+                adapter.notifyDataSetChanged();
+            } else {
+                pager.setCurrentItem(data.getIntExtra(ResultActivity.QUESTION, 0));
+            }
+        }
 
     }
 
@@ -204,10 +221,10 @@ public class QuestionActivity extends AppCompatActivity {
 
             switch (msg.what) {
                 case OK:
-                isCommitted = true;
-                UserCookies.getInstance().commitPractice(practiceId);
-                Toast.makeText(questionActivity, "提交成功", Toast.LENGTH_SHORT).show();
-                break;
+                    isCommitted = true;
+                    UserCookies.getInstance().commitPractice(practiceId);
+                    Toast.makeText(questionActivity, "提交成功", Toast.LENGTH_SHORT).show();
+                    break;
                 case NO:
                     Toast.makeText(questionActivity, "提交失败", Toast.LENGTH_SHORT).show();
                     break;
@@ -262,7 +279,7 @@ public class QuestionActivity extends AppCompatActivity {
         pager = findViewById(R.id.activity_question_pager);
         tvHint = findViewById(R.id.activity_question_tv_hint);
         container = findViewById(R.id.activity_question_dote);
-        isCommitted=UserCookies.getInstance().isPracticeCommitted(practiceId);
+        isCommitted = UserCookies.getInstance().isPracticeCommitted(practiceId);
         if (isCommitted) {
             tvCommit.setVisibility(View.GONE);
             tvView.setVisibility(View.VISIBLE);

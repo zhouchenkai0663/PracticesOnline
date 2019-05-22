@@ -1,5 +1,6 @@
 package net.lzzy.practicesonline.activities.activities;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ import net.lzzy.practicesonline.activities.fragments.GridFragment;
 
 
 import net.lzzy.practicesonline.activities.models.view.QuestionResult;
+import net.lzzy.practicesonline.activities.utils.AppUtils;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class ResultActivity extends BaseActivity implements GridFragment.OnGridS
 
 
     public static final String QUESTION = "question";
+    public static final String ENSHRINE = "enshrine";
     public List<QuestionResult> results;
     private Button btn;
 
@@ -34,21 +37,22 @@ public class ResultActivity extends BaseActivity implements GridFragment.OnGridS
         super.onCreate(savedInstanceState);
         btn = findViewById(R.id.activity_result_circle_btn_view);
         btn.setOnClickListener(new View.OnClickListener() {
-           @Override
-        public void onClick(View v) {
-            Fragment fragment = getManager().findFragmentById(R.id.activity_result_container);
-            if (fragment instanceof GridFragment) {
-                Fragment fragment1=  CharFragment.newInstance(results);
-                getManager().beginTransaction().replace(R.id.activity_result_container,fragment1).commit();
-                btn.setText("图");
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = getManager().findFragmentById(R.id.activity_result_container);
+                if (fragment instanceof GridFragment) {
+                    Fragment fragment1 = CharFragment.newInstance(results);
+                    getManager().beginTransaction().replace(R.id.activity_result_container, fragment1).commit();
+                    btn.setText("图");
+                }
+                if (fragment instanceof CharFragment) {
+                    Fragment fragment2 = createFragment();
+                    getManager().beginTransaction().replace(R.id.activity_result_container, fragment2).commit();
+                    btn.setText("表");
+                }
             }
-            if (fragment instanceof CharFragment){
-                Fragment fragment2=createFragment();
-                getManager().beginTransaction().replace(R.id.activity_result_container,fragment2).commit();
-                btn.setText("表");
-            }
-        }
-    });
+        });
+
     }
 
     /**
@@ -82,6 +86,7 @@ public class ResultActivity extends BaseActivity implements GridFragment.OnGridS
         return GridFragment.newInstance(results);
         //Grid
     }
+
     /**
      * 跳转返回Question视图查看题目
      *
@@ -93,6 +98,27 @@ public class ResultActivity extends BaseActivity implements GridFragment.OnGridS
         intent.putExtra(QUESTION, position);
         setResult(position, intent);
         finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("返回到哪里？")
+                .setPositiveButton("返回题目", (dialog, which) -> {
+                    finish();
+                })
+                .setNegativeButton("章节列表", (dialog, which) -> {
+                    startActivity(new Intent(this,PracticesActivity.class));
+                    finish();
+                })
+                .setNeutralButton("查看收藏", (dialog, which) -> {
+                    Intent intent=new Intent();
+                    intent.putExtra(ENSHRINE,true);
+                    setResult(RESULT_OK,intent);
+                    finish();
+                })
+                .show();
+
     }
 
     /**
